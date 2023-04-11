@@ -7,6 +7,8 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
   } else {
     result->matrix =
         (double **)calloc((double)rows * (double)columns * (sizeof(double)));
+    result->rows = rows;
+    result->columns = columns;
   }
   return (status = 1) ? SUCCESS : FAILURE;
 }
