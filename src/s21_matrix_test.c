@@ -6,7 +6,7 @@
 // Create matrix
 START_TEST(s21_create_matrix_fn) {
   int rows = 4, columns = 4;
-  matrix_t A;
+  matrix_t A = {0};
   int res = s21_create_matrix(rows, columns, &A);
   ck_assert_int_eq(res, ok);
   ck_assert_int_eq(A.rows, rows);
@@ -17,7 +17,7 @@ END_TEST
 
 START_TEST(s21_create_matrix_1_fn) {
   int rows = -1, columns = -1;
-  matrix_t A;
+  matrix_t A = {0};
   int res = s21_create_matrix(rows, columns, &A);
   ck_assert_int_eq(res, err_matrix);
   s21_remove_matrix(&A);
@@ -26,7 +26,7 @@ END_TEST
 
 START_TEST(s21_create_matrix_2_fn) {
   int rows = 0, columns = 0;
-  matrix_t A;
+  matrix_t A = {0};
   int res = s21_create_matrix(rows, columns, &A);
   ck_assert_int_eq(res, err_matrix);
   s21_remove_matrix(&A);
@@ -35,7 +35,7 @@ END_TEST
 
 START_TEST(s21_create_matrix_3_fn) {
   int rows = 1, columns = 0;
-  matrix_t A;
+  matrix_t A = {0};
   int res = s21_create_matrix(rows, columns, &A);
   ck_assert_int_eq(res, err_matrix);
   s21_remove_matrix(&A);
@@ -44,7 +44,7 @@ END_TEST
 
 START_TEST(s21_create_matrix_4_fn) {
   int rows = 0, columns = 1;
-  matrix_t A;
+  matrix_t A = {0};
   int res = s21_create_matrix(rows, columns, &A);
   ck_assert_int_eq(res, err_matrix);
   s21_remove_matrix(&A);
@@ -53,7 +53,7 @@ END_TEST
 
 START_TEST(s21_create_matrix_5_fn) {
   int rows = 1, columns = 1;
-  matrix_t A;
+  matrix_t A = {0};
   int res = s21_create_matrix(rows, columns, &A);
   ck_assert_int_eq(res, ok);
   ck_assert_int_eq(A.rows, rows);
@@ -65,7 +65,7 @@ END_TEST
 // Equality matrix
 START_TEST(s21_eq_matrix_fn) {
   int rows = 1, columns = 1, idx = 0, jdx = 0;
-  matrix_t A, B;
+  matrix_t A = {0}, B = {0};
   s21_create_matrix(rows, columns, &A);
   s21_create_matrix(rows, columns, &B);
   int res = s21_eq_matrix(&A, &B);
@@ -85,7 +85,7 @@ END_TEST
 START_TEST(s21_eq_matrix_1_fn) {
   int rows1 = 1, columns1 = 2;
   int rows2 = 2, columns2 = 1;
-  matrix_t A, B;
+  matrix_t A = {0}, B = {0};
   s21_create_matrix(rows1, columns1, &A);
   s21_create_matrix(rows2, columns2, &B);
   int res = s21_eq_matrix(&A, &B);
@@ -98,7 +98,7 @@ END_TEST
 START_TEST(s21_eq_matrix_2_fn) {
   int rows1 = 2, columns1 = 1;
   int rows2 = 1, columns2 = 2;
-  matrix_t A, B;
+  matrix_t A = {0}, B = {0};
   s21_create_matrix(rows1, columns1, &A);
   s21_create_matrix(rows2, columns2, &B);
   int res = s21_eq_matrix(&A, &B);
@@ -111,7 +111,7 @@ END_TEST
 START_TEST(s21_eq_matrix_3_fn) {
   int rows1 = 2, columns1 = 2;
   int rows2 = 1, columns2 = 2;
-  matrix_t A, B;
+  matrix_t A = {0}, B = {0};
   s21_create_matrix(rows1, columns1, &A);
   s21_create_matrix(rows2, columns2, &B);
   int res = s21_eq_matrix(&A, &B);
@@ -124,7 +124,7 @@ END_TEST
 START_TEST(s21_eq_matrix_4_fn) {
   int rows1 = 2, columns1 = 1;
   int rows2 = 2, columns2 = 2;
-  matrix_t A, B;
+  matrix_t A = {0}, B = {0};
   s21_create_matrix(rows1, columns1, &A);
   s21_create_matrix(rows2, columns2, &B);
   int res = s21_eq_matrix(&A, &B);
@@ -136,7 +136,7 @@ END_TEST
 
 START_TEST(s21_eq_matrix_5_fn) {
   int rows = 1, columns = 1, idx = 0, jdx = 0;
-  matrix_t A, B;
+  matrix_t A = {0}, B = {0};
   s21_create_matrix(rows, columns, &A);
   s21_create_matrix(rows, columns, &B);
   for (; idx < rows; ++idx) {
@@ -155,7 +155,7 @@ END_TEST
 
 START_TEST(s21_eq_matrix_6_fn) {
   int rows = 1, columns = 1, idx = 0, jdx = 0;
-  matrix_t A, B;
+  matrix_t A = {0}, B = {0};
   s21_create_matrix(rows, columns, &A);
   s21_create_matrix(rows, columns, &B);
   for (; idx < rows; ++idx) {
@@ -224,7 +224,7 @@ START_TEST(s21_eq_matrix_9_fn) {
 END_TEST
 
 Suite *s21_matrix_suit(void) {
-    Suite *s;
+  Suite *s;
   s = suite_create("Matrix functions");
 
   TCase *tc_create = tcase_create("s21_create_matrix");
