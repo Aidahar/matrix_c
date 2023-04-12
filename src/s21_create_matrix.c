@@ -15,7 +15,7 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
   } else {
     status = 0;
   }
-  return (status = 1) ? SUCCESS : FAILURE;
+  return (status = 1) ? ok : err_matrix;
 }
 
 void s21_remove_matrix(matrix_t *A) {
