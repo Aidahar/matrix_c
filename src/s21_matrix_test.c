@@ -64,11 +64,18 @@ END_TEST
 
 // Equality matrix
 START_TEST(s21_eq_matrix_fn) {
-  int rows = 1, columns = 1;
+  int rows = 1, columns = 1, idx = 0, jdx = 0;
   matrix_t A, B;
   s21_create_matrix(rows, columns, &A);
   s21_create_matrix(rows, columns, &B);
   int res = s21_eq_matrix(&A, &B);
+  for (; idx < rows; ++idx) {
+    for (; jdx < columns; ++jdx) {
+      double el = (double)idx + (double)jdx;
+      A.matrix[idx][jdx] = el;
+      B.matrix[idx][jdx] = el;
+    }
+  }
   ck_assert_int_eq(res, SUCCESS);
   s21_remove_matrix(&A);
   s21_remove_matrix(&B);
@@ -123,6 +130,83 @@ START_TEST(s21_eq_matrix_4_fn) {
   int res = s21_eq_matrix(&A, &B);
   ck_assert_int_eq(res, FAILURE);
   s21_remove_matrix(&A);
+  s21_remove_matrix(&B);
+}
+END_TEST
+
+START_TEST(s21_eq_matrix_5_fn) {
+  int rows = 1, columns = 1, idx = 0, jdx = 0;
+  matrix_t A, B;
+  s21_create_matrix(rows, columns, &A);
+  s21_create_matrix(rows, columns, &B);
+  for (; idx < rows; ++idx) {
+    for (; jdx < columns; ++jdx) {
+      double el = (double)idx + (double)jdx;
+      A.matrix[idx][jdx] = el;
+      B.matrix[idx][jdx] = el;
+    }
+  }
+  int res = s21_eq_matrix(&A, &B);
+  ck_assert_int_eq(res, SUCCESS);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&B);
+}
+END_TEST
+
+START_TEST(s21_eq_matrix_6_fn) {
+  int rows = 1, columns = 1, idx = 0, jdx = 0;
+  matrix_t A, B;
+  s21_create_matrix(rows, columns, &A);
+  s21_create_matrix(rows, columns, &B);
+  int res = s21_eq_matrix(&A, &B);
+  for (; idx < rows; ++idx) {
+    for (; jdx < columns; ++jdx) {
+      double el = (double)idx + (double)jdx;
+      A.matrix[idx][jdx] = el + 1e7;
+      B.matrix[idx][jdx] = el + 1e8;
+    }
+  }
+  ck_assert_int_eq(res, SUCCESS);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&B);
+}
+END_TEST
+
+START_TEST(s21_eq_matrix_7_fn) {
+  int rows = 1, columns = 1, idx = 0, jdx = 0;
+  matrix_t A = {0}, B = {0};
+  s21_create_matrix(rows, columns, &A);
+  s21_create_matrix(rows, columns, &B);
+  int res = s21_eq_matrix(&A, &B);
+  for (; idx < rows; ++idx) {
+    for (; jdx < columns; ++jdx) {
+      double el = (double)idx + (double)jdx;
+      A.matrix[idx][jdx] = el;
+      B.matrix[idx][jdx] = el + 2;
+    }
+  }
+  ck_assert_int_eq(res, FAILURE);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&B);
+}
+END_TEST
+
+START_TEST(s21_eq_matrix_8_fn) {
+  int rows1 = 1, columns1 = 2;
+  matrix_t A = {0};
+  s21_create_matrix(rows1, columns1, &A);
+  int res = s21_eq_matrix(&A, NULL);
+  ck_assert_int_eq(res, FAILURE);
+  s21_remove_matrix(&A);
+}
+END_TEST
+
+START_TEST(s21_eq_matrix_9_fn) {
+  int rows1 = 1, columns1 = 2;
+  matrix_t B = {0};
+  s21_create_matrix(rows1, columns1, &B);
+  int res = s21_eq_matrix(NULL, &B);
+  ck_assert_int_eq(res, FAILURE);
   s21_remove_matrix(&B);
 }
 END_TEST

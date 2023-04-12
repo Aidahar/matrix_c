@@ -1,3 +1,6 @@
+#ifndef S21_MATRIX_H_
+#define S21_MATRIX_H_
+
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,3 +31,5 @@ int s21_transpose(matrix_t *A, matrix_t *result);
 int s21_calc_complements(matrix_t *A, matrix_t *result);
 int s21_determinant(matrix_t *A, double *result);
 int s21_inverse_matrix(matrix_t *A, matrix_t *result);
+
+#endif  // S21_MATRIX_H
