@@ -10,7 +10,8 @@ int s21_eq_matrix(matrix_t *A, matrix_t *B) {
   } else {
     for (; i < A->rows; ++i) {
       for (; j < A->columns; ++j) {
-        if (abs(A->matrix[i][j] - B->matrix[i][j]) < 0.0000001) {
+        if (fabs(A->matrix[i][j]) * 10000000 !=
+            fabs(B->matrix[i][j]) * 10000000) {
           status = 0;
           break;
         }

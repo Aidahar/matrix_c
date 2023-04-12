@@ -27,7 +27,7 @@ test: s21_matrix.a
 	./s21_matrix_test
 
 s21_matrix.a : s21_matrix.o
-	ar rc libs21_matrix.aa *.o
+	ar rc libs21_matrix.a *.o
 	ranlib libs21_matrix.a
 	cp libs21_matrix.a s21_matrix.a
 
@@ -37,6 +37,6 @@ s21_matrix.o: ${FILES}
 .PHONY: all build clean rebuild
 
 clean:
-	rm -rf *.o *.out *.gch *.dSYM *.gcov *.gcda *.gcno*.a s21_matrix_test *.css *.html vgcore* report *.info *.gz *.log
+	rm -rf *.o *.out *.gch *.dSYM *.gcov *.gcda *.gcno *.a s21_matrix_test *.css *.html vgcore* report *.info *.gz *.log
 
 rebuild: clean s21_matrix.a

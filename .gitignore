@@ -1,5 +1,9 @@
 # Prerequisites
 *.d
+*.gcno
+*.info
+*.gcda
+report/
 
 # Object files
 *.o

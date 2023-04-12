@@ -9,13 +9,14 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
       for (; i < rows; ++i) {
         result->matrix[i] = calloc(columns, sizeof(double));
       }
+      result->rows = rows;
+      result->columns = columns;
     }
-    result->rows = rows;
-    result->columns = columns;
   } else {
     status = 0;
   }
-  return (status = 1) ? ok : err_matrix;
+
+  return (status == 1) ? ok : err_matrix;
 }
 
 void s21_remove_matrix(matrix_t *A) {
