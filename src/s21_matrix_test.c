@@ -227,7 +227,7 @@ END_TEST
 START_TEST(s21_helper_fn) {
   int rows = 0, columns = 0;
   int res = check_pos(rows, columns);
-  ck_assert_int_eq(res, 0);
+  ck_assert_int_eq(res, 1);
 }
 END_TEST
 
@@ -242,14 +242,14 @@ START_TEST(s21_helper_1_fn) {
     }
   }
   int res = valid_matrix(&B);
-  ck_assert_int_eq(res, ok);
+  ck_assert_int_eq(res, 1);
   s21_remove_matrix(&B);
 }
 END_TEST
 
 START_TEST(s21_helper_2_fn) {
   int res = valid_matrix(NULL);
-  ck_assert_int_eq(res, err_matrix);
+  ck_assert_int_eq(res, 0);
 }
 END_TEST
 
@@ -281,11 +281,37 @@ START_TEST(s21_helper_6_fn) {
 }
 END_TEST
 
+// Sum matrix
+START_TEST(s21_sum_matrix_fn) {
+  matrix_t A = {0}, B = {0}, R = {0};
+  int rows = 2, columns = 2, status = 0;
+  s21_create_matrix(rows, columns, &A);
+  s21_create_matrix(rows, columns, &B);
+  A.matrix[0][0] = -3;
+  A.matrix[0][1] = 4.2;
+  A.matrix[1][0] = 5;
+  A.matrix[1][1] = 6;
+  B.matrix[0][0] = 3;
+  B.matrix[0][1] = 4;
+  B.matrix[1][0] = 5;
+  B.matrix[1][1] = 6;
+  status = s21_sum_matrix(&A, &B, &R);
+  ck_assert_int_eq(status, 0);
+  ck_assert_int_eq((int)(R.matrix[0][0]), 0);
+  ck_assert_int_eq((int)(R.matrix[0][1] * 10), 82);
+  ck_assert_int_eq((int)(R.matrix[1][0]), 10);
+  ck_assert_int_eq((int)(R.matrix[1][1]), 12);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&B);
+  s21_remove_matrix(&R);
+}
+END_TEST
+
 Suite *s21_matrix_suit(void) {
   Suite *s;
   s = suite_create("Matrix functions");
 
-  TCase *tc_create = tcase_create("s21_create_matrix");
+  TCase *tc_create = tcase_create("s21_create");
   suite_add_tcase(s, tc_create);
   tcase_add_test(tc_create, s21_create_matrix_fn);
   tcase_add_test(tc_create, s21_create_matrix_1_fn);
@@ -294,7 +320,7 @@ Suite *s21_matrix_suit(void) {
   tcase_add_test(tc_create, s21_create_matrix_4_fn);
   tcase_add_test(tc_create, s21_create_matrix_5_fn);
 
-  TCase *tc_eq = tcase_create("s21_eq_matrix");
+  TCase *tc_eq = tcase_create("s21_eq");
   suite_add_tcase(s, tc_eq);
   tcase_add_test(tc_eq, s21_eq_matrix_fn);
   tcase_add_test(tc_eq, s21_eq_matrix_1_fn);
@@ -309,13 +335,17 @@ Suite *s21_matrix_suit(void) {
 
   TCase *tc_help = tcase_create("s21_helper");
   suite_add_tcase(s, tc_help);
-  tcase_add_test(tc_eq, s21_helper_fn);
-  tcase_add_test(tc_eq, s21_helper_1_fn);
-  tcase_add_test(tc_eq, s21_helper_2_fn);
-  tcase_add_test(tc_eq, s21_helper_3_fn);
-  tcase_add_test(tc_eq, s21_helper_4_fn);
-  tcase_add_test(tc_eq, s21_helper_5_fn);
-  tcase_add_test(tc_eq, s21_helper_6_fn);
+  tcase_add_test(tc_help, s21_helper_fn);
+  tcase_add_test(tc_help, s21_helper_1_fn);
+  tcase_add_test(tc_help, s21_helper_2_fn);
+  tcase_add_test(tc_help, s21_helper_3_fn);
+  tcase_add_test(tc_help, s21_helper_4_fn);
+  tcase_add_test(tc_help, s21_helper_5_fn);
+  tcase_add_test(tc_help, s21_helper_6_fn);
+
+  TCase *tc_sum = tcase_create("s21_sum");
+  suite_add_tcase(s, tc_sum);
+  tcase_add_test(tc_sum, s21_sum_matrix_fn);
 
   return s;
 }

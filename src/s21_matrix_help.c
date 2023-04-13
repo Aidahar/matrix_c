@@ -1,8 +1,8 @@
 #include "s21_matrix.h"
 
 int valid_matrix(matrix_t *A) {
-  int status = ok;
-  if (NULL == A) status = err_matrix;
+  int status = 0;
+  if (NULL != A) status = 1;
   return status;
 }
 

@@ -5,7 +5,7 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
   result->matrix = NULL;
   if (check_pos(rows, columns)) {
     result->matrix = calloc(rows, sizeof(double *));
-    if (NULL != result->matrix) {
+    if (valid_matrix(result)) {
       for (; i < rows; ++i) {
         result->matrix[i] = calloc(columns, sizeof(double));
       }
