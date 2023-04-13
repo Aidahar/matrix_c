@@ -5,6 +5,7 @@
 *.gcda
 report/
 s21_matrix_test
+.vscode
 
 # Object files
 *.o
