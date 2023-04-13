@@ -32,4 +32,7 @@ int s21_calc_complements(matrix_t *A, matrix_t *result);
 int s21_determinant(matrix_t *A, double *result);
 int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 
+// Help functions
+int check_pos(int a, int b);
+int valid_matrix(matrix_t *A);
 #endif  // S21_MATRIX_H

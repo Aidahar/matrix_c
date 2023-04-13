@@ -223,6 +223,64 @@ START_TEST(s21_eq_matrix_9_fn) {
 }
 END_TEST
 
+// Helper functions
+START_TEST(s21_helper_fn) {
+  int rows = 0, columns = 0;
+  int res = check_pos(rows, columns);
+  ck_assert_int_eq(res, 0);
+}
+END_TEST
+
+START_TEST(s21_helper_1_fn) {
+  int rows1 = 1, columns1 = 2, idx = 0, jdx = 0;
+  matrix_t B = {0};
+  s21_create_matrix(rows1, columns1, &B);
+  for (; idx < rows1; ++idx) {
+    for (; jdx < columns1; ++jdx) {
+      double el = (double)idx + (double)jdx;
+      B.matrix[idx][jdx] = el;
+    }
+  }
+  int res = valid_matrix(&B);
+  ck_assert_int_eq(res, ok);
+  s21_remove_matrix(&B);
+}
+END_TEST
+
+START_TEST(s21_helper_2_fn) {
+  int res = valid_matrix(NULL);
+  ck_assert_int_eq(res, err_matrix);
+}
+END_TEST
+
+START_TEST(s21_helper_3_fn) {
+  int rows = 0, columns = 23;
+  int res = check_pos(rows, columns);
+  ck_assert_int_eq(res, 0);
+}
+END_TEST
+
+START_TEST(s21_helper_4_fn) {
+  int rows = 23, columns = -23;
+  int res = check_pos(rows, columns);
+  ck_assert_int_eq(res, 0);
+}
+END_TEST
+
+START_TEST(s21_helper_5_fn) {
+  int rows = 23, columns = 23;
+  int res = check_pos(rows, columns);
+  ck_assert_int_eq(res, 1);
+}
+END_TEST
+
+START_TEST(s21_helper_6_fn) {
+  int rows = -23, columns = 23;
+  int res = check_pos(rows, columns);
+  ck_assert_int_eq(res, 0);
+}
+END_TEST
+
 Suite *s21_matrix_suit(void) {
   Suite *s;
   s = suite_create("Matrix functions");
@@ -248,6 +306,16 @@ Suite *s21_matrix_suit(void) {
   tcase_add_test(tc_eq, s21_eq_matrix_7_fn);
   tcase_add_test(tc_eq, s21_eq_matrix_8_fn);
   tcase_add_test(tc_eq, s21_eq_matrix_9_fn);
+
+  TCase *tc_help = tcase_create("s21_helper");
+  suite_add_tcase(s, tc_help);
+  tcase_add_test(tc_eq, s21_helper_fn);
+  tcase_add_test(tc_eq, s21_helper_1_fn);
+  tcase_add_test(tc_eq, s21_helper_2_fn);
+  tcase_add_test(tc_eq, s21_helper_3_fn);
+  tcase_add_test(tc_eq, s21_helper_4_fn);
+  tcase_add_test(tc_eq, s21_helper_5_fn);
+  tcase_add_test(tc_eq, s21_helper_6_fn);
 
   return s;
 }

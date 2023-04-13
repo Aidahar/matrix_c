@@ -3,7 +3,7 @@
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
   int status = 1, i = 0;
   result->matrix = NULL;
-  if (0 < rows && 0 < columns) {
+  if (check_pos(rows, columns)) {
     result->matrix = calloc(rows, sizeof(double *));
     if (NULL != result->matrix) {
       for (; i < rows; ++i) {
