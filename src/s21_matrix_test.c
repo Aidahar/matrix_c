@@ -227,7 +227,7 @@ END_TEST
 START_TEST(s21_helper_fn) {
   int rows = 0, columns = 0;
   int res = check_pos(rows, columns);
-  ck_assert_int_eq(res, 1);
+  ck_assert_int_eq(res, 0);
 }
 END_TEST
 
@@ -307,6 +307,36 @@ START_TEST(s21_sum_matrix_fn) {
 }
 END_TEST
 
+START_TEST(s21_sum_matrix_1_fn) {
+  matrix_t A = {0}, R = {0};
+  int rows = 2, columns = 2, status = 0;
+  s21_create_matrix(rows, columns, &A);
+  A.matrix[0][0] = 123.33;
+  A.matrix[0][1] = 4.2;
+  A.matrix[1][0] = 4444;
+  A.matrix[1][1] = 123.231;
+  status = s21_sum_matrix(&A, NULL, &R);
+  ck_assert_int_eq(status, 1);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&R);
+}
+END_TEST
+
+START_TEST(s21_sum_matrix_2_fn) {
+  matrix_t B = {0}, R = {0};
+  int rows = 2, columns = 2, status = 0;
+  s21_create_matrix(rows, columns, &B);
+  B.matrix[0][0] = 123.33;
+  B.matrix[0][1] = 4.2;
+  B.matrix[1][0] = 4444;
+  B.matrix[1][1] = 123.231;
+  status = s21_sum_matrix(NULL, &B, &R);
+  ck_assert_int_eq(status, 1);
+  s21_remove_matrix(&B);
+  s21_remove_matrix(&R);
+}
+END_TEST
+
 Suite *s21_matrix_suit(void) {
   Suite *s;
   s = suite_create("Matrix functions");
@@ -346,6 +376,8 @@ Suite *s21_matrix_suit(void) {
   TCase *tc_sum = tcase_create("s21_sum");
   suite_add_tcase(s, tc_sum);
   tcase_add_test(tc_sum, s21_sum_matrix_fn);
+  tcase_add_test(tc_sum, s21_sum_matrix_1_fn);
+  tcase_add_test(tc_sum, s21_sum_matrix_2_fn);
 
   return s;
 }

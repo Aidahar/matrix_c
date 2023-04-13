@@ -13,3 +13,9 @@ int check_pos(int a, int b) {
   }
   return status;
 }
+
+int eq_size(matrix_t *A, matrix_t *B) {
+  int status = 0;
+  if (A->rows == B->rows && A->columns == B->columns) status = 1;
+  return status;
+}
