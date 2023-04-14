@@ -1,13 +1,23 @@
 #include "s21_matrix.h"
 
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
-  int status = 1, i = 0;
+  int status = 1;
   result->matrix = NULL;
   if (check_pos(rows, columns)) {
     result->matrix = calloc(rows, sizeof(double *));
     if (valid_matrix(result)) {
-      for (; i < rows; ++i) {
+      int i;
+      for (i = 0; i < rows; ++i) {
         result->matrix[i] = calloc(columns, sizeof(double));
+        if (NULL == result->matrix[i]) {
+          int j;
+          for (j = 0; j < rows; ++j) {
+            free(result->matrix[j]);
+          }
+          free(result);
+          status = 0;
+          break;
+        } 
       }
       result->rows = rows;
       result->columns = columns;

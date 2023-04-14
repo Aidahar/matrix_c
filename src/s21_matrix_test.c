@@ -443,6 +443,7 @@ START_TEST(s21_sub_matrix_4_fn) {
 }
 END_TEST
 
+
 Suite *s21_matrix_suit(void) {
   Suite *s;
   s = suite_create("Matrix functions");
@@ -494,6 +495,7 @@ Suite *s21_matrix_suit(void) {
   tcase_add_test(tc_sub, s21_sub_matrix_2_fn);
   tcase_add_test(tc_sub, s21_sub_matrix_3_fn);
   tcase_add_test(tc_sub, s21_sub_matrix_4_fn);
+
 
   return s;
 }
