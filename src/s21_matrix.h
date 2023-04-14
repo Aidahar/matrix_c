@@ -34,7 +34,8 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result);
 
 // Help functions
 int check_pos(int a, int b);
-int valid_matrix(matrix_t *A);
 int eq_size(matrix_t *A, matrix_t *B);
+int valid_matrix(matrix_t *A);
+int valid_number(double num);
 
 #endif  // S21_MATRIX_H

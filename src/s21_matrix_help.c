@@ -6,6 +6,12 @@ int valid_matrix(matrix_t *A) {
   return status;
 }
 
+int valid_number(double num) {
+  int status = 0;
+  if (NULL != num) status = 1;
+  return status;
+ }
+
 int check_pos(int a, int b) {
   int status = 0;
   if (0 < a && 0 < b) {
