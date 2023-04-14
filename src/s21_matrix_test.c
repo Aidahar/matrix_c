@@ -362,6 +362,87 @@ START_TEST(s21_sum_matrix_4_fn) {
 }
 END_TEST
 
+//Sub matrix
+START_TEST(s21_sub_matrix_fn) {
+  matrix_t A = {0}, B = {0}, R = {0};
+  int rows = 2, columns = 2, status = 0;
+  s21_create_matrix(rows, columns, &A);
+  s21_create_matrix(rows, columns, &B);
+  A.matrix[0][0] = -3;
+  A.matrix[0][1] = 4.2;
+  A.matrix[1][0] = 5;
+  A.matrix[1][1] = 6;
+  B.matrix[0][0] = 3;
+  B.matrix[0][1] = 4;
+  B.matrix[1][0] = 5;
+  B.matrix[1][1] = 6;
+  status = s21_sub_matrix(&A, &B, &R);
+  ck_assert_int_eq(status, 0);
+  ck_assert_int_eq((int)(R.matrix[0][0]), -6);
+  ck_assert_int_eq((int)(R.matrix[0][1] * 10), 2);
+  ck_assert_int_eq((int)(R.matrix[1][0]), 0);
+  ck_assert_int_eq((int)(R.matrix[1][1]), 0);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&B);
+  s21_remove_matrix(&R);
+}
+END_TEST
+
+START_TEST(s21_sub_matrix_1_fn) {
+  matrix_t A = {0}, R = {0};
+  int rows = 2, columns = 2, status = 0;
+  s21_create_matrix(rows, columns, &A);
+  A.matrix[0][0] = 123.33;
+  A.matrix[0][1] = 4.2;
+  A.matrix[1][0] = 4444;
+  A.matrix[1][1] = 123.231;
+  status = s21_sum_matrix(&A, NULL, &R);
+  ck_assert_int_eq(status, 1);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&R);
+}
+END_TEST
+
+START_TEST(s21_sub_matrix_2_fn) {
+  matrix_t B = {0}, R = {0};
+  int rows = 2, columns = 2, status = 0;
+  s21_create_matrix(rows, columns, &B);
+  B.matrix[0][0] = 123.33;
+  B.matrix[0][1] = 4.2;
+  B.matrix[1][0] = 4444;
+  B.matrix[1][1] = 123.231;
+  status = s21_sub_matrix(NULL, &B, &R);
+  ck_assert_int_eq(status, 1);
+  s21_remove_matrix(&B);
+  s21_remove_matrix(&R);
+}
+END_TEST
+
+START_TEST(s21_sub_matrix_3_fn) {
+  matrix_t A = {0}, B = {0}, R = {0};
+  int rows = 2, columns = 2, status = 0;
+  s21_create_matrix(rows, columns, &A);
+  status = s21_sub_matrix(&A, &B, &R);
+  ck_assert_int_eq(status, 1);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&B);
+  s21_remove_matrix(&R);
+}
+END_TEST
+
+START_TEST(s21_sub_matrix_4_fn) {
+  matrix_t A = {0}, B = {0}, R = {0};
+  int rows = 2, columns = 2,rows1 = 4, columns1 = 4, status = 0;
+  s21_create_matrix(rows, columns, &A);
+  s21_create_matrix(rows1, columns1, &B);
+  status = s21_sub_matrix(&A, &B, &R);
+  ck_assert_int_eq(status, 1);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&B);
+  s21_remove_matrix(&R);
+}
+END_TEST
+
 Suite *s21_matrix_suit(void) {
   Suite *s;
   s = suite_create("Matrix functions");
@@ -405,6 +486,14 @@ Suite *s21_matrix_suit(void) {
   tcase_add_test(tc_sum, s21_sum_matrix_2_fn);
   tcase_add_test(tc_sum, s21_sum_matrix_3_fn);
   tcase_add_test(tc_sum, s21_sum_matrix_4_fn);
+
+  TCase *tc_sub = tcase_create("s21_sub");
+  suite_add_tcase(s, tc_sub);
+  tcase_add_test(tc_sub, s21_sub_matrix_fn);
+  tcase_add_test(tc_sub, s21_sub_matrix_1_fn);
+  tcase_add_test(tc_sub, s21_sub_matrix_2_fn);
+  tcase_add_test(tc_sub, s21_sub_matrix_3_fn);
+  tcase_add_test(tc_sub, s21_sub_matrix_4_fn);
 
   return s;
 }
