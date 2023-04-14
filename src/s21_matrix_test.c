@@ -443,6 +443,33 @@ START_TEST(s21_sub_matrix_4_fn) {
 }
 END_TEST
 
+//Multiply by number
+START_TEST(s21_mul_num_fn) {
+  matrix_t A = {0}, R = {0};
+  int rows = 2, columns = 2, status = 0;
+  s21_create_matrix(rows, columns, &A);
+  A.matrix[0][0] = 123.33;
+  A.matrix[0][1] = 4.2;
+  A.matrix[1][0] = 444.4;
+  A.matrix[1][1] = 123.231;
+  status = s21_mult_number(&A, 2, &R);
+  ck_assert_int_eq(status, 0);
+  ck_assert_double_eq_tol(R.matrix[0][0], 246.66, 0.000001);
+  ck_assert_double_eq_tol(R.matrix[0][1], 8.4, 0.000001);
+  ck_assert_double_eq_tol(R.matrix[1][0], 888.8, 0.000001);
+  ck_assert_double_eq_tol(R.matrix[1][1], 246.462, 0.000001);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&R);
+}
+END_TEST
+
+START_TEST(s21_mul_num_1_fn) {
+  matrix_t R = {0};
+  int status = s21_mult_number(NULL, 2, &R);
+  ck_assert_int_eq(status, 1);
+  s21_remove_matrix(&R);
+}
+END_TEST
 
 Suite *s21_matrix_suit(void) {
   Suite *s;
@@ -496,6 +523,10 @@ Suite *s21_matrix_suit(void) {
   tcase_add_test(tc_sub, s21_sub_matrix_3_fn);
   tcase_add_test(tc_sub, s21_sub_matrix_4_fn);
 
+  TCase *tc_mul_num = tcase_create("s21_mul_num");
+  suite_add_tcase(s, tc_mul_num);
+  tcase_add_test(tc_sub, s21_mul_num_fn);
+  tcase_add_test(tc_sub, s21_mul_num_1_fn);
 
   return s;
 }
