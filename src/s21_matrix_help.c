@@ -6,7 +6,7 @@ int valid_matrix(matrix_t *A) {
   return status;
 }
 
-int valid_number(double num) {
+int valid_number(double *num) {
   int status = 0;
   if (NULL != num) status = 1;
   return status;
