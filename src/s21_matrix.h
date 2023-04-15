@@ -37,5 +37,6 @@ int check_pos(int a, int b);
 int eq_size(matrix_t *A, matrix_t *B);
 int valid_matrix(matrix_t *A);
 int valid_number(double *num);
+void mul_matr(matrix_t *A, matrix_t *B, matrix_t *result);
 
 #endif  // S21_MATRIX_H
