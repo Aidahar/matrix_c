@@ -567,6 +567,38 @@ START_TEST(s21_mul_matrix_5_fn) {
 }
 END_TEST
 
+//Transpose matrix
+START_TEST(s21_transpose_fn) {
+  int rows = 3, columns = 2;
+  matrix_t A = {0}, R = {0};
+  s21_create_matrix(rows, columns, &A);
+  A.matrix[0][0] = 1;
+  A.matrix[0][1] = 4;
+  A.matrix[1][0] = 2;
+  A.matrix[1][1] = 5;
+  A.matrix[2][0] = 3;
+  A.matrix[2][1] = 6;
+  int status = s21_transpose(&A, &R);
+  ck_assert_int_eq(status, 0);
+  ck_assert_double_eq_tol(R.matrix[0][0], 1, 0.000001);
+  ck_assert_double_eq_tol(R.matrix[0][1], 2, 0.000001);
+  ck_assert_double_eq_tol(R.matrix[0][2], 3, 0.000001);
+  ck_assert_double_eq_tol(R.matrix[1][0], 4, 0.000001);
+  ck_assert_double_eq_tol(R.matrix[1][1], 5, 0.000001);
+  ck_assert_double_eq_tol(R.matrix[1][2], 6, 0.000001);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&R);
+}
+END_TEST
+
+START_TEST(s21_transpose_1_fn) {
+  matrix_t R = {0};
+  int status = s21_transpose(NULL, &R);
+  ck_assert_int_eq(status, 1);
+  s21_remove_matrix(&R);
+}
+END_TEST
+
 Suite *s21_matrix_suit(void) {
   Suite *s;
   s = suite_create("Matrix functions");
@@ -631,7 +663,11 @@ Suite *s21_matrix_suit(void) {
   tcase_add_test(tc_sub, s21_mul_matrix_2_fn);
   tcase_add_test(tc_sub, s21_mul_matrix_3_fn);
   tcase_add_test(tc_sub, s21_mul_matrix_4_fn);
-  // tcase_add_test(tc_sub, s21_mul_matrix_5_fn);
+  
+  TCase *tc_trans = tcase_create("s21_transpose");
+  suite_add_tcase(s, tc_trans);
+  tcase_add_test(tc_trans, s21_transpose_fn);
+  tcase_add_test(tc_trans, s21_transpose_1_fn);
 
   return s;
 }
