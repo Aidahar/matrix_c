@@ -38,6 +38,7 @@ int eq_size(matrix_t *A, matrix_t *B);
 int valid_matrix(matrix_t *A);
 int valid_number(double *num);
 void mul_matr(matrix_t *A, matrix_t *B, matrix_t *result);
-int minor_mx(int i, int j, matrix_t *A, matrix_t *result); 
+int minor_mx(int i, int j, matrix_t *A, matrix_t *result);
+int is_square_mx(matrix_t *mx);
 
 #endif  // S21_MATRIX_H

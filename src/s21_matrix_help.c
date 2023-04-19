@@ -19,3 +19,11 @@ int eq_size(matrix_t *A, matrix_t *B) {
   if (A->rows == B->rows && A->columns == B->columns) status = 1;
   return status;
 }
+
+int is_square_mx(matrix_t *mx) {
+  int status = 0;
+  if (mx->rows == 2 && mx->columns == 2) {
+    status = 1;
+  }
+  return status;
+}
