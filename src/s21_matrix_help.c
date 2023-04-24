@@ -11,3 +11,13 @@ int eq_size(matrix_t *A, matrix_t *B) {
 }
 
 int is_square_mx(matrix_t *mx) { return (mx->rows == mx->columns) ? 1 : 0; }
+
+void swap_rows(matrix_t *A, int pivot, int i) {
+  int col = A->columns;
+  double tmp;
+  for (int j = 0; j < col; ++j) {
+    tmp = A->matrix[pivot][col];
+    A->matrix[pivot][col] = A->matrix[i][col];
+    A->matrix[i][col] = tmp;
+  }
+}
