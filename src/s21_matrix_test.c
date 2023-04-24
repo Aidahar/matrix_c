@@ -620,6 +620,15 @@ START_TEST(s21_determinant_fn) {
 }
 END_TEST
 
+START_TEST(s21_determinant_1_fn) {
+  matrix_t A = {0};
+  double result = 0;
+  int ret_val = s21_determinant(&A, &result);
+  ck_assert_int_eq(ret_val, err_matrix);
+  s21_remove_matrix(&A);
+}
+END_TEST
+
 START_TEST(s21_determinant_2_fn) {
   matrix_t A = {0};
   s21_create_matrix(3, 4, &A);
@@ -715,6 +724,7 @@ Suite *s21_matrix_suit(void) {
   TCase *tc_det = tcase_create("s21_determinant");
   suite_add_tcase(s, tc_det);
   tcase_add_test(tc_det, s21_determinant_fn);
+  tcase_add_test(tc_det, s21_determinant_1_fn);
   tcase_add_test(tc_det, s21_determinant_2_fn);
 
   return s;

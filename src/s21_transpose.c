@@ -11,7 +11,7 @@ int s21_transpose(matrix_t *A, matrix_t *result) {
         }
       }
     } else {
-      status = err_matrix;  
+      status = err_matrix;
     }
   } else {
     status = err_matrix;

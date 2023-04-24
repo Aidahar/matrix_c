@@ -2,10 +2,9 @@
 
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
   int status = 1;
-  result->matrix = NULL;
-  if (check_pos(rows, columns)) {
-    result->matrix = calloc(rows, sizeof(double *));
-    if (valid_matrix(result)) {
+  if (result) {
+    if (check_pos(rows, columns)) {
+      result->matrix = calloc(rows, sizeof(double *));
       int i;
       for (i = 0; i < rows; ++i) {
         result->matrix[i] = calloc(columns, sizeof(double));
@@ -17,7 +16,7 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
           free(result);
           status = 0;
           break;
-        } 
+        }
       }
       result->rows = rows;
       result->columns = columns;
