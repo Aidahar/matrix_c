@@ -1,5 +1,14 @@
 #include "s21_matrix.h"
 
+// int main(void) {
+//   int rows = -1, columns = -1;
+//   matrix_t A = {0};
+//   int res = s21_create_matrix(rows, columns, &A);
+//   printf("%d %d\n", res, err_matrix);
+//   s21_remove_matrix(&A);
+//   return 0;
+// }
+
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
   int status = 1;
   if (result) {
@@ -20,6 +29,8 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
       }
       result->rows = rows;
       result->columns = columns;
+    } else {
+      status = 0;
     }
   } else {
     status = 0;

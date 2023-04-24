@@ -1,18 +1,9 @@
 #include "s21_matrix.h"
 
-// int main(void) {
-//   matrix_t A = {0};
-//   double result = 0;
-//   int ret_val = s21_determinant(&A, &result);
-//   printf("%d %d\n", ret_val, err_matrix);
-//   s21_remove_matrix(&A);
-//   return 0;
-// }
-
 int s21_determinant(matrix_t *A, double *result) {
   int status = ok;
   if (valid_matrix(A)) {
-    if (A->columns == A->rows) {
+    if (is_square_mx(A)) {
       int pivot_index = -1, rc = A->rows;
       double pivot_value = 0;
       *result = 1;

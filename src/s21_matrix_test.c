@@ -62,6 +62,12 @@ START_TEST(s21_create_matrix_5_fn) {
 }
 END_TEST
 
+START_TEST(s21_create_matrix_6_fn) {
+  int rows = 25, cols = 5;
+  int ret_val = s21_create_matrix(rows, cols, NULL);
+  ck_assert_int_eq(ret_val, err_matrix);
+}
+END_TEST
 // Equality matrix
 START_TEST(s21_eq_matrix_fn) {
   int rows = 1, columns = 1, idx = 0, jdx = 0;
@@ -663,6 +669,7 @@ Suite *s21_matrix_suit(void) {
   tcase_add_test(tc_create, s21_create_matrix_3_fn);
   tcase_add_test(tc_create, s21_create_matrix_4_fn);
   tcase_add_test(tc_create, s21_create_matrix_5_fn);
+  tcase_add_test(tc_create, s21_create_matrix_6_fn);
 
   TCase *tc_eq = tcase_create("s21_eq");
   suite_add_tcase(s, tc_eq);
