@@ -14,7 +14,7 @@ int is_square_mx(matrix_t *mx) { return (mx->rows == mx->columns) ? 1 : 0; }
 
 void swap_rows(matrix_t *A, int pivot, int i) {
   double tmp;
-  for (int j = 0; j < A->rows; ++j) {
+  for (int j = 0; j < A->columns; ++j) {
     tmp = A->matrix[pivot][j];
     A->matrix[pivot][j] = A->matrix[i][j];
     A->matrix[i][j] = tmp;
