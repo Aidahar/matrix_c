@@ -619,8 +619,8 @@ START_TEST(s21_determinant_fn) {
   A.matrix[2][1] = 2;
   A.matrix[2][2] = 1;
   double result = 0;
-  int ret_val = s21_determinant(&A, &result);
-  ck_assert_int_eq(ret_val, ok);
+  int status = s21_determinant(&A, &result);
+  ck_assert_int_eq(status, ok);
   ck_assert_int_eq(result, -40);
   s21_remove_matrix(&A);
 }

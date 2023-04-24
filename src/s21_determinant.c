@@ -1,25 +1,5 @@
 #include "s21_matrix.h"
 
-int main(void) {
-    matrix_t A = {0};
-  s21_create_matrix(3, 3, &A);
-  A.matrix[0][0] = 1;
-  A.matrix[0][1] = 2;
-  A.matrix[0][2] = 3;
-  A.matrix[1][0] = 0;
-  A.matrix[1][1] = 4;
-  A.matrix[1][2] = 2;
-  A.matrix[2][0] = 5;
-  A.matrix[2][1] = 2;
-  A.matrix[2][2] = 1;
-  double result = 0;
-  int ret_val = s21_determinant(&A, &result);
-  printf("%d %d\n", ret_val, ok);
-  printf("%f %d\n", result, -40);
-  s21_remove_matrix(&A);
-  return 0;
-}
-
 int s21_determinant(matrix_t *A, double *result) {
   int status = ok;
   if (valid_matrix(A)) {
