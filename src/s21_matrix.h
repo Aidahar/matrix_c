@@ -7,6 +7,7 @@
 
 #define SUCCESS 1
 #define FAILURE 0
+#define EPS 0.000001
 
 enum status { ok, err_matrix, err_calculate };
 
@@ -41,5 +42,6 @@ void mul_matr(matrix_t *A, matrix_t *B, matrix_t *result);
 int minor_mx(int i, int j, matrix_t *A, matrix_t *result);
 int is_square_mx(matrix_t *mx);
 int det(matrix_t *mx, double *elem);
+void swap_rows(matrix_t *A, int pivot, int i);
 
 #endif  // S21_MATRIX_H

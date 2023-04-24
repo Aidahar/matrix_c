@@ -22,7 +22,7 @@ int eq_size(matrix_t *A, matrix_t *B) {
 
 int is_square_mx(matrix_t *mx) {
   int status = 0;
-  if (mx->rows == 2 && mx->columns == 2) {
+  if (mx->rows == mx->columns) {
     status = 1;
   }
   return status;

@@ -10,7 +10,7 @@ int s21_eq_matrix(matrix_t *A, matrix_t *B) {
   } else {
     for (; i < A->rows; ++i) {
       for (; j < A->columns; ++j) {
-        if (fabs(A->matrix[i][j] - fabs(B->matrix[i][j])) > 1e-6) {
+        if (fabs(A->matrix[i][j] - fabs(B->matrix[i][j])) > EPS) {
           status = 0;
           break;
         }

@@ -351,7 +351,7 @@ END_TEST
 
 START_TEST(s21_sum_matrix_4_fn) {
   matrix_t A = {0}, B = {0}, R = {0};
-  int rows = 2, columns = 2,rows1 = 4, columns1 = 4, status = 0;
+  int rows = 2, columns = 2, rows1 = 4, columns1 = 4, status = 0;
   s21_create_matrix(rows, columns, &A);
   s21_create_matrix(rows1, columns1, &B);
   status = s21_sum_matrix(&A, &B, &R);
@@ -362,7 +362,7 @@ START_TEST(s21_sum_matrix_4_fn) {
 }
 END_TEST
 
-//Sub matrix
+// Sub matrix
 START_TEST(s21_sub_matrix_fn) {
   matrix_t A = {0}, B = {0}, R = {0};
   int rows = 2, columns = 2, status = 0;
@@ -378,7 +378,7 @@ START_TEST(s21_sub_matrix_fn) {
   B.matrix[1][1] = 6;
   status = s21_sub_matrix(&A, &B, &R);
   ck_assert_int_eq(status, 0);
-  ck_assert_double_eq_tol((R.matrix[0][0]), -6.011,0.000001);
+  ck_assert_double_eq_tol((R.matrix[0][0]), -6.011, 0.000001);
   ck_assert_double_eq_tol((R.matrix[0][1]), 0.2, 0.000001);
   ck_assert_double_eq_tol((R.matrix[1][0]), 240.4, 0.000001);
   ck_assert_double_eq_tol((R.matrix[1][1]), 660.33, 0.000001);
@@ -432,7 +432,7 @@ END_TEST
 
 START_TEST(s21_sub_matrix_4_fn) {
   matrix_t A = {0}, B = {0}, R = {0};
-  int rows = 2, columns = 2,rows1 = 4, columns1 = 4, status = 0;
+  int rows = 2, columns = 2, rows1 = 4, columns1 = 4, status = 0;
   s21_create_matrix(rows, columns, &A);
   s21_create_matrix(rows1, columns1, &B);
   status = s21_sub_matrix(&A, &B, &R);
@@ -443,7 +443,7 @@ START_TEST(s21_sub_matrix_4_fn) {
 }
 END_TEST
 
-//Multiply by number
+// Multiply by number
 START_TEST(s21_mul_num_fn) {
   matrix_t A = {0}, R = {0};
   int rows = 2, columns = 2, status = 0;
@@ -471,7 +471,7 @@ START_TEST(s21_mul_num_1_fn) {
 }
 END_TEST
 
-//Multiply matrix
+// Multiply matrix
 START_TEST(s21_mul_matrix_fn) {
   int status = 0, rows = 3, columns = 2, rows2 = 2, columns2 = 3;
   matrix_t A = {0}, B = {0}, R = {0};
@@ -567,7 +567,7 @@ START_TEST(s21_mul_matrix_5_fn) {
 }
 END_TEST
 
-//Transpose matrix
+// Transpose matrix
 START_TEST(s21_transpose_fn) {
   int rows = 3, columns = 2;
   matrix_t A = {0}, R = {0};
@@ -596,6 +596,49 @@ START_TEST(s21_transpose_1_fn) {
   int status = s21_transpose(NULL, &R);
   ck_assert_int_eq(status, 1);
   s21_remove_matrix(&R);
+}
+END_TEST
+
+// Determinant
+START_TEST(s21_determinant_fn) {
+  matrix_t A = {0};
+  s21_create_matrix(3, 3, &A);
+  A.matrix[0][0] = 1;
+  A.matrix[0][1] = 2;
+  A.matrix[0][2] = 3;
+  A.matrix[1][0] = 0;
+  A.matrix[1][1] = 4;
+  A.matrix[1][2] = 2;
+  A.matrix[2][0] = 5;
+  A.matrix[2][1] = 2;
+  A.matrix[2][2] = 1;
+  double result = 0;
+  int ret_val = s21_determinant(&A, &result);
+  ck_assert_int_eq(ret_val, ok);
+  ck_assert_int_eq(result, -40);
+  s21_remove_matrix(&A);
+}
+END_TEST
+
+START_TEST(s21_determinant_2_fn) {
+  matrix_t A = {0};
+  s21_create_matrix(3, 4, &A);
+  A.matrix[0][0] = 1;
+  A.matrix[0][1] = 2;
+  A.matrix[0][2] = 3;
+  A.matrix[0][3] = 3;
+  A.matrix[1][0] = 0;
+  A.matrix[1][1] = 4;
+  A.matrix[1][2] = 2;
+  A.matrix[1][3] = 3;
+  A.matrix[2][0] = 5;
+  A.matrix[2][1] = 2;
+  A.matrix[2][2] = 1;
+  A.matrix[2][3] = 2;
+  double result = 0;
+  int ret_val = s21_determinant(&A, &result);
+  ck_assert_int_eq(ret_val, err_calculate);
+  s21_remove_matrix(&A);
 }
 END_TEST
 
@@ -663,11 +706,16 @@ Suite *s21_matrix_suit(void) {
   tcase_add_test(tc_sub, s21_mul_matrix_2_fn);
   tcase_add_test(tc_sub, s21_mul_matrix_3_fn);
   tcase_add_test(tc_sub, s21_mul_matrix_4_fn);
-  
+
   TCase *tc_trans = tcase_create("s21_transpose");
   suite_add_tcase(s, tc_trans);
   tcase_add_test(tc_trans, s21_transpose_fn);
   tcase_add_test(tc_trans, s21_transpose_1_fn);
+
+  TCase *tc_det = tcase_create("s21_determinant");
+  suite_add_tcase(s, tc_det);
+  tcase_add_test(tc_det, s21_determinant_fn);
+  tcase_add_test(tc_det, s21_determinant_2_fn);
 
   return s;
 }

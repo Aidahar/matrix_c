@@ -1,6 +1,6 @@
 CFLAGS = -Wall -Wextra -Werror -g
 GCOV = -fprofile-arcs -ftest-coverage -fPIC
-FILES = s21_create_matrix.c s21_eq_matrix.c s21_matrix_help.c s21_sum_matrix.c s21_sub_matrix.c s21_mult_number.c s21_mult_matrix.c s21_transpose.c
+FILES = s21_create_matrix.c s21_eq_matrix.c s21_matrix_help.c s21_sum_matrix.c s21_sub_matrix.c s21_mult_number.c s21_mult_matrix.c s21_transpose.c s21_determinant.c
 OS = $(shell uname)
 
 ifeq (${OS}, Linux)
