@@ -38,7 +38,7 @@ int check_pos(int a, int b);
 int eq_size(matrix_t *A, matrix_t *B);
 int valid_matrix(matrix_t *A);
 void mul_matr(matrix_t *A, matrix_t *B, matrix_t *result);
-int minor_mx(int i, int j, matrix_t *A, matrix_t *result);
+int minor_mx(matrix_t *A, matrix_t *result);
 int is_square_mx(matrix_t *mx);
 void swap_rows(matrix_t *A, int pivot, int i);
 
