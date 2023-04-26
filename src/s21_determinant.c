@@ -3,7 +3,11 @@
 int s21_determinant(matrix_t *A, double *result) {
   int status = ok;
   if (valid_matrix(A)) {
-    if (is_square_mx(A)) {
+    if (A->rows == 1 && A->columns == 1) {
+      *result = A->matrix[0][0];
+    } else if (A->rows == 2 && A->columns == 2) {
+      square_mx(A, result);
+    } else if (is_square_mx(A)) {
       int pivot_index = -1, rc = A->rows;
       double pivot_value = 0;
       *result = 1;

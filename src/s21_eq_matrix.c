@@ -2,15 +2,16 @@
 
 int s21_eq_matrix(matrix_t *A, matrix_t *B) {
   int status = 1;
-  int i = 0, j = 0;
+
   if (NULL == A || NULL == B) {
     status = 0;
   } else if (A->rows != B->rows || A->columns != B->columns) {
     status = 0;
   } else {
-    for (; i < A->rows; ++i) {
-      for (; j < A->columns; ++j) {
-        if (fabs(A->matrix[i][j] - fabs(B->matrix[i][j])) > EPS) {
+    int idx, jdx;
+    for (idx = 0; idx < A->rows; ++idx) {
+      for (jdx = 0; jdx < A->columns; ++jdx) {
+        if (fabs(A->matrix[idx][jdx] - B->matrix[idx][jdx]) > EPS) {
           status = 0;
           break;
         }

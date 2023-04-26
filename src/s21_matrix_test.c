@@ -683,6 +683,65 @@ START_TEST(s21_determinant_4_fn) {
 }
 END_TEST
 
+// Calc_compliments
+START_TEST(s21_calc_complements_fn) {
+  matrix_t A = {0}, check = {0}, result = {0};
+  s21_create_matrix(3, 3, &A);
+  s21_create_matrix(3, 3, &check);
+  A.matrix[0][0] = 1;
+  A.matrix[0][1] = 2;
+  A.matrix[0][2] = 3;
+  A.matrix[1][0] = 0;
+  A.matrix[1][1] = 4;
+  A.matrix[1][2] = 2;
+  A.matrix[2][0] = 5;
+  A.matrix[2][1] = 2;
+  A.matrix[2][2] = 1;
+
+  check.matrix[0][0] = 0;
+  check.matrix[0][1] = 10;
+  check.matrix[0][2] = -20;
+  check.matrix[1][0] = 4;
+  check.matrix[1][1] = -14;
+  check.matrix[1][2] = 8;
+  check.matrix[2][0] = -8;
+  check.matrix[2][1] = -2;
+  check.matrix[2][2] = 4;
+
+  int ret_val = s21_calc_complements(&A, &result);
+  ck_assert_int_eq(ret_val, ok);
+  int eq = s21_eq_matrix(&result, &check);
+  ck_assert_int_eq(eq, SUCCESS);
+  s21_remove_matrix(&A);
+  s21_remove_matrix(&check);
+  s21_remove_matrix(&result);
+}
+END_TEST
+
+START_TEST(s21_calc_complements_1_fn) {
+  matrix_t A = {0}, result = {0};
+  s21_create_matrix(3, 5, &A);
+  int ret_val = s21_calc_complements(&A, &result);
+  ck_assert_int_eq(ret_val, err_calculate);
+  s21_remove_matrix(&A);
+}
+END_TEST
+
+START_TEST(s21_calc_complements_2_fn) {
+  matrix_t A = {0}, result = {0};
+  A.rows = -3, A.columns = 5;
+  int ret_val = s21_calc_complements(&A, &result);
+  ck_assert_int_eq(ret_val, err_matrix);
+}
+END_TEST
+
+START_TEST(s21_calc_complements_3_fn) {
+  matrix_t A = {0}, result = {0};
+  int ret_val = s21_calc_complements(&A, &result);
+  ck_assert_int_eq(ret_val, err_matrix);
+}
+END_TEST
+
 Suite *s21_matrix_suit(void) {
   Suite *s;
   s = suite_create("Matrix functions");
@@ -761,6 +820,13 @@ Suite *s21_matrix_suit(void) {
   tcase_add_test(tc_det, s21_determinant_2_fn);
   tcase_add_test(tc_det, s21_determinant_3_fn);
   tcase_add_test(tc_det, s21_determinant_4_fn);
+
+  TCase *tc_calc = tcase_create("s21_calc_compliments");
+  suite_add_tcase(s, tc_calc);
+  tcase_add_test(tc_calc, s21_calc_complements_fn);
+  tcase_add_test(tc_calc, s21_calc_complements_1_fn);
+  tcase_add_test(tc_calc, s21_calc_complements_2_fn);
+  tcase_add_test(tc_calc, s21_calc_complements_3_fn);
 
   return s;
 }

@@ -41,5 +41,8 @@ void mul_matr(matrix_t *A, matrix_t *B, matrix_t *result);
 int minor_mx(matrix_t *A, matrix_t *result);
 int is_square_mx(matrix_t *mx);
 void swap_rows(matrix_t *A, int pivot, int i);
+void fill_mx(int i, int j, matrix_t *A, matrix_t *tmp);
+void print_mx(matrix_t *A);
+void square_mx(matrix_t *A, double *result);
 
 #endif  // S21_MATRIX_H
