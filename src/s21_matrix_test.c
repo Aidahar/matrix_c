@@ -657,6 +657,32 @@ START_TEST(s21_determinant_2_fn) {
 }
 END_TEST
 
+START_TEST(s21_determinant_3_fn) {
+  matrix_t A = {0};
+  s21_create_matrix(1, 1, &A);
+  A.matrix[0][0] = 1;
+  double result = 0;
+  int status = s21_determinant(&A, &result);
+  ck_assert_int_eq(status, ok);
+  ck_assert_int_eq(result, 1);
+  s21_remove_matrix(&A);
+}
+END_TEST
+START_TEST(s21_determinant_4_fn) {
+  matrix_t A = {0};
+  s21_create_matrix(2, 2, &A);
+  A.matrix[0][0] = 2;
+  A.matrix[0][1] = 3;
+  A.matrix[1][0] = 1;
+  A.matrix[1][1] = -1;
+  double result = 0;
+  int status = s21_determinant(&A, &result);
+  ck_assert_int_eq(status, ok);
+  ck_assert_int_eq(result, -5);
+  s21_remove_matrix(&A);
+}
+END_TEST
+
 Suite *s21_matrix_suit(void) {
   Suite *s;
   s = suite_create("Matrix functions");
@@ -733,6 +759,8 @@ Suite *s21_matrix_suit(void) {
   tcase_add_test(tc_det, s21_determinant_fn);
   tcase_add_test(tc_det, s21_determinant_1_fn);
   tcase_add_test(tc_det, s21_determinant_2_fn);
+  tcase_add_test(tc_det, s21_determinant_3_fn);
+  tcase_add_test(tc_det, s21_determinant_4_fn);
 
   return s;
 }
