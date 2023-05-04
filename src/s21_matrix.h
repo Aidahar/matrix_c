@@ -44,5 +44,9 @@ void swap_rows(matrix_t *A, int pivot, int i);
 void fill_mx(int i, int j, matrix_t *A, matrix_t *tmp);
 void print_mx(matrix_t *A);
 void square_mx(matrix_t *A, double *result);
+int copy_mx(matrix_t *A, matrix_t *result);
 
+int swap(matrix_t *A, int idx, int kdx, int col);
+void det_calc(matrix_t *A, double **result, int cnt);
+void gauss(matrix_t *A, int *cnt);
 #endif  // S21_MATRIX_H

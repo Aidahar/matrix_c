@@ -1,6 +1,6 @@
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror 
 GCOV = -fprofile-arcs -ftest-coverage -fPIC
-FILES = s21_create_matrix.c s21_eq_matrix.c s21_matrix_help.c s21_sum_matrix.c s21_sub_matrix.c s21_mult_number.c s21_mult_matrix.c s21_transpose.c s21_determinant.c s21_calc_compliments.c
+FILES = s21_create_matrix.c s21_eq_matrix.c s21_matrix_help.c s21_sum_matrix.c s21_sub_matrix.c s21_mult_number.c s21_mult_matrix.c s21_transpose.c s21_determinant.c s21_calc_compliments.c s21_inverse_matrix.c
 OS = $(shell uname)
 
 ifeq (${OS}, Linux)
@@ -37,6 +37,6 @@ s21_matrix.o: ${FILES}
 .PHONY: all build clean rebuild
 
 clean:
-	rm -rf *.o *.out *.gch *.dSYM *.gcov *.gcda *.gcno *.a s21_matrix_test *.css *.html vgcore* report *.info *.gz *.log
+	rm -rf *.o *.out *.gch *.dSYM *.gcov *.gcda *.gcno *.a s21_matrix_test *.css *.html vgcore* report *.info *.gz *.log test
 
 rebuild: clean s21_matrix.a
