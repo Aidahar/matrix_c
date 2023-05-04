@@ -31,27 +31,11 @@ void square_mx(matrix_t *A, double *result) {
       A->matrix[0][0] * A->matrix[1][1] - A->matrix[0][1] * A->matrix[1][0];
 }
 
-<<<<<<< HEAD
-=======
-void print_mx(matrix_t *A) {
-  for (int idx = 0; idx < A->rows; ++idx) {
-    for (int jdx = 0; jdx < A->columns; ++jdx) {
-      printf("%f ", A->matrix[idx][jdx]);
-    }
-    printf("\n");
-  }
-}
-
->>>>>>> 1604a728220b156ccdba76b1b282301c5faea5d3
 int copy_mx(matrix_t *A, matrix_t *result) {
   int status = ok;
   if (valid_matrix(A)) {
     s21_create_matrix(A->rows, A->columns, result);
-<<<<<<< HEAD
     for (int idx = 0; idx < A->rows; ++idx) {
-=======
-    for(int idx = 0; idx < A->rows; ++idx) {
->>>>>>> 1604a728220b156ccdba76b1b282301c5faea5d3
       for (int jdx = 0; jdx < A->columns; ++jdx) {
         result->matrix[idx][jdx] = A->matrix[idx][jdx];
       }
@@ -60,7 +44,6 @@ int copy_mx(matrix_t *A, matrix_t *result) {
     status = err_matrix;
   }
   return status;
-<<<<<<< HEAD
 }
 
 int minor_mx(matrix_t *A, matrix_t *result) {
@@ -94,6 +77,3 @@ int minor_mx(matrix_t *A, matrix_t *result) {
 //     printf("\n");
 //   }
 // }
-=======
-}
->>>>>>> 1604a728220b156ccdba76b1b282301c5faea5d3
